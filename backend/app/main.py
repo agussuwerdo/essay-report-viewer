@@ -5,6 +5,7 @@ from . import models, database
 from pydantic import BaseModel
 from typing import List
 import json
+from datetime import datetime
 
 # Ensure all tables are created
 models.Base.metadata.create_all(bind=database.engine)
@@ -30,10 +31,13 @@ class CommentCreate(BaseModel):
 class Comment(BaseModel):
     id: int
     content: str
-    created_at: str
+    created_at: datetime
 
     class Config:
         from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat()
+        }
 
 @app.get("/api/essay")
 async def get_essay():
