@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from . import models, database
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from typing import List, Optional
 import json
 from datetime import datetime
@@ -84,6 +84,12 @@ class CommentCreate(BaseModel):
                 "content": "This is a great essay!"
             }
         }
+
+    @validator('content')
+    def content_must_not_be_empty(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Comment content cannot be empty')
+        return v.strip()
 
 class Comment(BaseModel):
     id: int

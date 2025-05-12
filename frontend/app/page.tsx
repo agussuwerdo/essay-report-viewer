@@ -6,11 +6,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "../components/ui/dialog";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
 
 type Annotation = {
   start: number;
@@ -25,6 +23,19 @@ type Comment = {
   id: number;
   content: string;
   created_at: string;
+};
+
+type ValidationError = {
+  type: string;
+  loc: string[];
+  msg: string;
+  input: string;
+  ctx: Record<string, unknown>;
+  url: string;
+};
+
+type ErrorResponse = {
+  detail: ValidationError[];
 };
 
 export default function EssayReportViewer() {
@@ -55,18 +66,15 @@ export default function EssayReportViewer() {
     e.preventDefault();
     setError(null);
     setSuccess(null);
-    if (!commentInput.trim()) {
-      setError("Comment cannot be empty.");
-      return;
-    }
     try {
       const res = await axios.post<Comment>(`${apiUrl}/api/comments`, { content: commentInput.trim() });
       setComments([res.data, ...comments]);
       setCommentInput("");
       setSuccess("Comment submitted successfully.");
     } catch (err: any) {
-      if (err.response && err.response.data && err.response.data.detail) {
-        setError(`Error: ${err.response.data.detail}`);
+      const errorResponse = err.response?.data as ErrorResponse;
+      if (errorResponse?.detail?.[0]?.msg) {
+        setError(errorResponse.detail[0].msg);
       } else {
         setError("Failed to submit comment. Please try again later.");
       }
@@ -120,7 +128,7 @@ export default function EssayReportViewer() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Essay + Annotations View</h1>
       <div className="bg-white p-6 rounded shadow mb-8">
         <div className="leading-relaxed text-lg">{renderEssay()}</div>
@@ -128,7 +136,7 @@ export default function EssayReportViewer() {
 
       {/* Annotation Modal */}
       <Dialog open={!!selectedAnnotation} onOpenChange={() => setSelectedAnnotation(null)}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-[500px]">
           <DialogHeader className="relative">
             <DialogTitle className="capitalize">{selectedAnnotation?.error}</DialogTitle>
             {/* Close button */}
@@ -175,12 +183,18 @@ export default function EssayReportViewer() {
         {error && <div className="text-red-600 mb-2">{error}</div>}
         {success && <div className="text-green-600 mb-2">{success}</div>}
         <div className="space-y-4">
-          {comments.map((c) => (
-            <div key={c.id} className="border-b pb-2">
-              <div>{c.content}</div>
-              <div className="text-xs text-gray-500">{formatDate(c.created_at)}</div>
+          {comments.length === 0 ? (
+            <div className="text-center text-gray-500 py-8 border rounded-lg bg-gray-50">
+              No comments yet. Be the first to comment!
             </div>
-          ))}
+          ) : (
+            comments.map((c) => (
+              <div key={c.id} className="border-b pb-2">
+                <div>{c.content}</div>
+                <div className="text-xs text-gray-500">{formatDate(c.created_at)}</div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

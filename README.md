@@ -26,7 +26,7 @@ A web application for viewing and managing essay reports and feedback.
 
 ### 1. Clone the repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/agussuwerdo/essay-report-viewer.git
 cd essay-report-viewer
 ```
 
