@@ -35,17 +35,18 @@ export default function EssayReportViewer() {
   const [commentInput, setCommentInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
   useEffect(() => {
     setError(null);
-    axios.get<{ essay: string; annotations: Annotation[][] }>("http://localhost:8000/api/essay")
+    axios.get<{ essay: string; annotations: Annotation[][] }>(`${apiUrl}/api/essay`)
       .then(res => {
         setEssay(res.data.essay);
         setAnnotations(res.data.annotations[0]);
       })
       .catch(() => setError("Failed to load essay."));
 
-    axios.get<Comment[]>("http://localhost:8000/api/comments")
+    axios.get<Comment[]>(`${apiUrl}/api/comments`)
       .then(res => setComments(res.data))
       .catch(() => setError("Failed to load comments."));
   }, []);
@@ -59,7 +60,7 @@ export default function EssayReportViewer() {
       return;
     }
     try {
-      const res = await axios.post<Comment>("http://localhost:8000/api/comments", { content: commentInput.trim() });
+      const res = await axios.post<Comment>(`${apiUrl}/api/comments`, { content: commentInput.trim() });
       setComments([res.data, ...comments]);
       setCommentInput("");
       setSuccess("Comment submitted successfully.");
