@@ -1,0 +1,95 @@
+{
+    "essay": "The people gathered around a poor little boy. They were all shocked to see this, until an old lady said something. The bustling streets of Sembawang Shopping Centre was crowded with tons of people. A little boy, Leon, was sitting at the corner of the taco stall.\n\nHis shirt was torn, his white shoes became black and he is very lonely. A few days has passed and nobody came to lend out a helping hand for him, until, an old lady carrying groceries came and she said\" Here you go, little boy.\" passing Leon a taco and a mineral water.\n\n\"What is your name?\u201d asked the old lady. Leon said\u201d My name is Leon.\u201d \u201cWhat a poor little boy!\u201d She sighed. The old lady wanted to know more information about Leon so she asked\u201d Where are your parents? What happened to them?\u201d While Leon eyes welled up with tears, he continued\u201d my parents were eaten by a rhinoceros in London. We were supposed to be buying groceries in the supermarket. But there it when, straight for my parents. The rhinoceros escaped from the zoo but after that the zookeeper had managed to get it back to the zoo.\u201d\n\nAfter 2 days, the old lady appeared but Leon was not at the corner anymore. Someone had brought him back to take care of him. The old lady smiled and thought\u201d If only Leon was here, I could have brought him back to my home.\u201d",
+    "annotations": [
+        [
+            {
+                "end": 168,
+                "text": "was",
+                "error": "subject-verb agreement",
+                "start": 165,
+                "suggestion": "were",
+                "explanation": "The subject 'streets' is plural, so the verb should also be in plural form."
+            },
+            {
+                "end": 306,
+                "text": "became",
+                "error": "verb tense consistency",
+                "start": 300,
+                "suggestion": "had become",
+                "explanation": "The sentence is in past tense, so 'became' should be 'had become' to maintain consistency."
+            },
+            {
+                "end": 350,
+                "text": "has",
+                "error": "subject-verb agreement",
+                "start": 347,
+                "suggestion": "have",
+                "explanation": "The subject 'days' is plural, so the verb should also be in plural form."
+            },
+            {
+                "end": 408,
+                "text": "lend out a helping hand for him",
+                "error": "preposition usage",
+                "start": 377,
+                "suggestion": "lend a helping hand to him",
+                "explanation": "The correct phrase is 'lend a helping hand to him'."
+            },
+            {
+                "end": 466,
+                "text": "she said\"",
+                "error": "punctuation",
+                "start": 457,
+                "suggestion": "she said, \"",
+                "explanation": "There should be a space after 'said' and before the quotation mark."
+            },
+            {
+                "end": 586,
+                "text": "Leon said\u201d",
+                "error": "punctuation",
+                "start": 576,
+                "suggestion": "Leon said, \"",
+                "explanation": "There should be a space after 'said' and before the quotation mark."
+            },
+            {
+                "end": 712,
+                "text": "she asked\u201d",
+                "error": "punctuation",
+                "start": 702,
+                "suggestion": "she asked, \"",
+                "explanation": "There should be a space after 'asked' and before the quotation mark."
+            },
+            {
+                "end": 776,
+                "text": "Leon eyes",
+                "error": "possessive form",
+                "start": 767,
+                "suggestion": "Leon's eyes",
+                "explanation": "The possessive form should be used to indicate that the eyes belong to Leon."
+            },
+            {
+                "end": 812,
+                "text": "he continued\u201d",
+                "error": "punctuation",
+                "start": 799,
+                "suggestion": "he continued, \"",
+                "explanation": "There should be a space after 'continued' and before the quotation mark."
+            },
+            {
+                "end": 939,
+                "text": "there it when",
+                "error": "word choice",
+                "start": 926,
+                "suggestion": "there it went",
+                "explanation": "The correct phrase is 'there it went'."
+            },
+            {
+                "end": 1230,
+                "text": "thought\u201d",
+                "error": "punctuation",
+                "start": 1222,
+                "suggestion": "thought, \"",
+                "explanation": "There should be a space after 'thought' and before the quotation mark."
+            }
+        ]
+    ]
+}
