@@ -103,10 +103,24 @@ export default function EssayReportViewer() {
     return parts;
   }
 
+  function formatDate(dateString: string) {
+    const date = new Date(dateString);
+    return date
+      .toLocaleString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      })
+      .replace("AM", "am")
+      .replace("PM", "pm");
+  }
+
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Essay + Annotations View</h1>
-      {error && <div className="mb-4 text-red-600">{error}</div>}
       <div className="bg-white p-6 rounded shadow mb-8">
         <div className="leading-relaxed text-lg">{renderEssay()}</div>
       </div>
@@ -163,7 +177,7 @@ export default function EssayReportViewer() {
           {comments.map((c) => (
             <div key={c.id} className="border-b pb-2">
               <div>{c.content}</div>
-              <div className="text-xs text-gray-500">{new Date(c.created_at).toLocaleString()}</div>
+              <div className="text-xs text-gray-500">{formatDate(c.created_at)}</div>
             </div>
           ))}
         </div>

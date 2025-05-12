@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Essay Report Viewer
+
+A web application for viewing essays, annotations, and user comments.
+
+**Frontend:** Next.js + Shadcn
+**Backend:** FastAPI + SQLite
+
+---
+
+## Features
+- View essays with annotated feedback
+- See detailed explanations and corrections for each annotation
+- Add and view user comments
+- Responsive, modern UI
+
+---
+
+## Prerequisites
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+- (For local dev) Node.js (v18+) and Python 3.11+ (optional, if not using Docker)
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd EssayReportViewer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Start with Docker
+This will build and run both frontend and backend:
+```bash
+docker compose up --build
+```
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:8000](http://localhost:8000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Stopping and Cleaning Up
+To stop and remove all containers, networks, and volumes:
+```bash
+docker compose down --volumes --remove-orphans
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Development
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend (Next.js)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Runs at [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Backend (FastAPI)
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+Runs at [http://localhost:8000](http://localhost:8000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Project Structure
+```
+EssayReportViewer/
+├── backend/         # FastAPI backend
+│   ├── app/
+│   ├── requirements.txt
+│   └── ...
+├── frontend/        # Next.js frontend
+│   ├── app/
+│   ├── package.json
+│   └── ...
+└── docker-compose.yml
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+- The frontend expects `REACT_APP_API_URL` (set in `docker-compose.yml`) to point to the backend.
+
+---
+
+## Database
+- Uses SQLite (`essay_comments.db` in `backend/`).
+- The database file is ignored by git.
+
+---
+
+## License
+MIT
