@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /app/node_modules
+      - ./frontend:/app
     environment:
       - REACT_APP_API_URL=http://localhost:8000
     depends_on:
